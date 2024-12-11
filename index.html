@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google Score Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #000000;
+            color: #ffffff;
+        }
+
+        .calculator {
+            width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #000000;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            border-color: #ece295;
+        }
+
+        h2, h3 {
+            color: #ffffff;
+            text-align: center;
+        }
+
+        /* Styling for the hyperlink */
+        .made-by {
+            text-align: center;
+            font-size: 1em;
+            margin-top: -10px;
+            margin-bottom: 20px;
+        }
+
+        .made-by a {
+            color: #ece295;
+            text-decoration: none;
+        }
+
+        .input-row {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .input-row label {
+            flex: 1;
+            font-weight: bold;
+        }
+
+        input[type="number"] {
+            background-color: #ffffff;
+            border-color: #ece295;
+            color: #000000;
+            padding: 10px;
+            width: 80px;
+            margin-left: 10px;
+            border-radius: 4px;
+            text-align: center;
+        }
+
+        .increment-button, .decrement-button {
+            background-color: #ffffff;
+            color: #000000;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            margin-left: 10px;
+            border-radius: 4px;
+        }
+
+        .result {
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-top: 20px;
+            padding: 15px;
+            border: 1px solid #ece295;
+            color: white;
+            text-align: center;
+        }
+
+        .result-score {
+            background-color: #4caf50;
+            color: #ffffff;
+        }
+
+        .section-header {
+            font-size: 1.3em;
+            margin-top: 30px;
+            margin-bottom: 10px;
+            color: #ece295;
+            cursor: pointer;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .explanation-text {
+            font-size: 0.9em;
+            color: #cccccc;
+        }
+
+        .result-revenue, .result-profit {
+            background-color: #2196f3;
+            color: #ffffff;
+            padding: 10px;
+            font-size: 1.2em;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        /* Small-text styling */
+        .small-text {
+            font-size: 0.8em;
+            color: #cccccc;
+            font-style: italic;
+            margin-top: -10px;
+            margin-bottom: 15px;
+            line-height: 1.1;
+        }
+
+        /* Alignment and sizing adjustments */
+        .aligned-input-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .aligned-input-row input {
+            width: 100px;
+            margin-left: 10px;
+            padding: 10px;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div class="calculator">
+        <h2>Google Score Calculator</h2>
+
+        <!-- Made by with hyperlink -->
+        <p class="made-by">
+            Made by <a href="https://b2bsolutions.io/review-removal" target="_blank">Innovative Business Solutions</a>
+        </p>
+
+        <!-- Input Your Current Number of Reviews -->
+        <h3 class="section-header">Input Your Current Number of Reviews</h3>
+        <div class="input-row">
+            <label>Current Reviews (5 Stars):</label>
+            <button class="decrement-button" data-target="reviews5">-</button>
+            <input type="number" id="reviews5" value="">
+            <button class="increment-button" data-target="reviews5">+</button>
+        </div>
+        <div class="input-row">
+            <label>Current Reviews (4 Stars):</label>
+            <button class="decrement-button" data-target="reviews4">-</button>
+            <input type="number" id="reviews4" value="">
+            <button class="increment-button" data-target="reviews4">+</button>
+        </div>
+        <div class="input-row">
+            <label>Current Reviews (3 Stars):</label>
+            <button class="decrement-button" data-target="reviews3">-</button>
+            <input type="number" id="reviews3" value="">
+            <button class="increment-button" data-target="reviews3">+</button>
+        </div>
+        <div class="input-row">
+            <label>Current Reviews (2 Stars):</label>
+            <button class="decrement-button" data-target="reviews2">-</button>
+            <input type="number" id="reviews2" value="">
+            <button class="increment-button" data-target="reviews2">+</button>
+        </div>
+        <div class="input-row">
+            <label>Current Reviews (1 Star):</label>
+            <button class="decrement-button" data-target="reviews1">-</button>
+            <input type="number" id="reviews1" value="">
+            <button class="increment-button" data-target="reviews1">+</button>
+        </div>
+
+        <!-- Display Current Google Score -->
+        <h3>Your Current Google Score: <span id="currentScore">3.0</span></h3>
+
+        <!-- Input the Number of Reviews You Wish to Remove -->
+        <h3 class="section-header">Input the Number of Reviews You Wish to Remove</h3>
+        <div class="input-row">
+            <label>Remove 5 Star Reviews:</label>
+            <button class="decrement-button" data-target="remove5">-</button>
+            <input type="number" id="remove5" value="">
+            <button class="increment-button" data-target="remove5">+</button>
+        </div>
+        <div class="input-row">
+            <label>Remove 4 Star Reviews:</label>
+            <button class="decrement-button" data-target="remove4">-</button>
+            <input type="number" id="remove4" value="">
+            <button class="increment-button" data-target="remove4">+</button>
+        </div>
+        <div class="input-row">
+            <label>Remove 3 Star Reviews:</label>
+            <button class="decrement-button" data-target="remove3">-</button>
+            <input type="number" id="remove3" value="">
+            <button class="increment-button" data-target="remove3">+</button>
+        </div>
+        <div class="input-row">
+            <label>Remove 2 Star Reviews:</label>
+            <button class="decrement-button" data-target="remove2">-</button>
+            <input type="number" id="remove2" value="">
+            <button class="increment-button" data-target="remove2">+</button>
+        </div>
+        <div class="input-row">
+            <label>Remove 1 Star Reviews:</label>
+            <button class="decrement-button" data-target="remove1">-</button>
+            <input type="number" id="remove1" value="">
+            <button class="increment-button" data-target="remove1">+</button>
+        </div>
+
+        <!-- Score After Removals Section -->
+        <div class="result result-score">
+            Your Score After Removals: <span id="afterRemovals">3.7</span>
+        </div>
+
+        <!-- Toggle Section for Revenue -->
+        <div class="section-header" onclick="toggleSection('revenue-section')">Click to see how your Score affects REVENUE ▼</div>
+        <div id="revenue-section" class="hidden">
+            <div class="aligned-input-row">
+                <label>Input Your Current Annual Revenue ($):</label>
+                <input type="number" id="annualRevenue" value="">
+            </div>
+            <div class="result-revenue">
+                Increase in Your Revenue: $<span id="revenueIncrease">101.82</span> <br>
+                Based on your future Google Score *
+            </div>
+        </div>
+
+        <!-- Toggle Section for Profit -->
+        <div class="section-header" onclick="toggleSection('profit-section')">Click to see how your Score affects PROFIT ▼</div>
+        <div id="profit-section" class="hidden">
+            <div class="aligned-input-row">
+                <label>Your Future Annual Revenue ($):</label>
+                <input type="number" id="futureRevenue" value="" readonly>
+            </div>
+            <p class="small-text">Your annual revenue based on your future Google Score *</p>
+            <div class="aligned-input-row">
+                <label>Input Your Profit Margin on Extra Sales (%):</label>
+                <input type="number" id="profitMargin" value="">
+            </div>
+            <div class="result-profit">
+                Additional Annual Profit: $<span id="profitIncrease">20.36</span> <br>
+                Your Net Profit on Additional New Sales
+            </div>
+        </div>
+
+        <script>
+            // Toggle Section Function
+            function toggleSection(id) {
+                const section = document.getElementById(id);
+                if (section.classList.contains('hidden')) {
+                    section.classList.remove('hidden');
+                } else {
+                    section.classList.add('hidden');
+                }
+            }
+
+            // Increment and Decrement Buttons for Reviews
+            document.querySelectorAll('.increment-button').forEach(button => {
+                button.addEventListener('click', () => {
+                    const target = document.getElementById(button.getAttribute('data-target'));
+                    target.value = parseInt(target.value) + 1 || 1;
+                    calculateScores();
+                });
+            });
+
+            document.querySelectorAll('.decrement-button').forEach(button => {
+                button.addEventListener('click', () => {
+                    const target = document.getElementById(button.getAttribute('data-target'));
+                    if (parseInt(target.value) > 0) {
+                        target.value = parseInt(target.value) - 1;
+                        calculateScores();
+                    }
+                });
+            });
+
+            // Listen for changes in Annual Revenue to trigger recalculation
+            document.getElementById('annualRevenue').addEventListener('input', function () {
+                calculateRevenueIncrease(parseFloat(document.getElementById('currentScore').innerText), parseFloat(document.getElementById('afterRemovals').innerText));
+            });
+
+            // Listen for changes in Profit Margin to recalculate profit
+            document.getElementById('profitMargin').addEventListener('input', function () {
+                calculateProfit(); // Recalculate profit when margin changes
+            });
+
+            // Score Calculation Function
+            function calculateScores() {
+                const reviews5 = parseInt(document.getElementById('reviews5').value) || 0;
+                const reviews4 = parseInt(document.getElementById('reviews4').value) || 0;
+                const reviews3 = parseInt(document.getElementById('reviews3').value) || 0;
+                const reviews2 = parseInt(document.getElementById('reviews2').value) || 0;
+                const reviews1 = parseInt(document.getElementById('reviews1').value) || 0;
+
+                const totalReviews = reviews5 + reviews4 + reviews3 + reviews2 + reviews1;
+                const weightedScore = totalReviews ? (reviews5 * 5 + reviews4 * 4 + reviews3 * 3 + reviews2 * 2 + reviews1) / totalReviews : NaN;
+
+                document.getElementById('currentScore').innerText = isNaN(weightedScore) ? "NaN" : weightedScore.toFixed(1);
+
+                const remove5 = parseInt(document.getElementById('remove5').value) || 0;
+                const remove4 = parseInt(document.getElementById('remove4').value) || 0;
+                const remove3 = parseInt(document.getElementById('remove3').value) || 0;
+                const remove2 = parseInt(document.getElementById('remove2').value) || 0;
+                const remove1 = parseInt(document.getElementById('remove1').value) || 0;
+
+                const remainingReviews5 = Math.max(reviews5 - remove5, 0);
+                const remainingReviews4 = Math.max(reviews4 - remove4, 0);
+                const remainingReviews3 = Math.max(reviews3 - remove3, 0);
+                const remainingReviews2 = Math.max(reviews2 - remove2, 0);
+                const remainingReviews1 = Math.max(reviews1 - remove1, 0);
+
+                const remainingTotalReviews = remainingReviews5 + remainingReviews4 + remainingReviews3 + remainingReviews2 + remainingReviews1;
+                const newWeightedScore = remainingTotalReviews ? (remainingReviews5 * 5 + remainingReviews4 * 4 + remainingReviews3 * 3 + remainingReviews2 * 2 + remainingReviews1) / remainingTotalReviews : NaN;
+
+                document.getElementById('afterRemovals').innerText = isNaN(newWeightedScore) ? "NaN" : newWeightedScore.toFixed(1);
+
+                // Calculate Revenue Increase
+                calculateRevenueIncrease(weightedScore, newWeightedScore);
+            }
+
+            // Revenue Increase Calculation
+            function calculateRevenueIncrease(oldScore, newScore) {
+                const currentRevenue = parseFloat(document.getElementById('annualRevenue').value) || 0;
+                const scoreDifference = newScore - oldScore;
+
+                const revenueIncrease = currentRevenue * (scoreDifference * 0.07);
+
+                document.getElementById('revenueIncrease').innerText = isNaN(revenueIncrease) ? "NaN" : revenueIncrease.toFixed(2);
+
+                // Automatically update Future Annual Revenue
+                const futureRevenue = currentRevenue + revenueIncrease;
+                document.getElementById('futureRevenue').value = isNaN(futureRevenue) ? "" : futureRevenue.toFixed(2);
+
+                calculateProfit();
+            }
+
+            // Profit Calculation based on Profit Margin
+            function calculateProfit() {
+                const profitMargin = parseFloat(document.getElementById('profitMargin').value) / 100 || 0;
+                const revenueIncrease = parseFloat(document.getElementById('revenueIncrease').innerText) || 0;
+
+                const additionalProfit = revenueIncrease * profitMargin;
+
+                document.getElementById('profitIncrease').innerText = isNaN(additionalProfit) ? "NaN" : additionalProfit.toFixed(2);
+            }
+
+            calculateScores();
+        </script>
+    </div>
+</body>
+
+</html>
